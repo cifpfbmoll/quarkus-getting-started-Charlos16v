@@ -15,6 +15,13 @@ public class GreetingResource {
     GreetingService service;
 
     @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    @Path("/car")
+    public Car getCar() {
+        return new Car("Volkswagen", "Golf G60", 180);
+    }
+
+    @GET
     @Produces(MediaType.TEXT_PLAIN)
     @Path("/greeting/{name}")
     public String greeting(@PathParam String name) {
