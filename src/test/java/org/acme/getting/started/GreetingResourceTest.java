@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 import java.util.UUID;
 
 import static io.restassured.RestAssured.given;
+import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;
 
 @QuarkusTest
@@ -29,6 +30,18 @@ public class GreetingResourceTest {
                 .then()
                 .statusCode(200)
                 .body(is("Hello " + uuid));
+    }
+
+    @Test
+    public void getCarTestEndpoint() {
+        given()
+                .when().get("/hello/car")
+                .then()
+                .statusCode(200)
+                .assertThat()
+                .body("brand", equalTo("Volkswagen"))
+                .body("model", equalTo("Golf G60"))
+                .body("power", equalTo(180));
     }
 
 }
