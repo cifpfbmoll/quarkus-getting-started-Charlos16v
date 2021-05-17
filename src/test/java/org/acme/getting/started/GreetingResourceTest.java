@@ -44,4 +44,19 @@ public class GreetingResourceTest {
                 .body("power", equalTo(180));
     }
 
+    @Test
+    public void createCarTestEndpoint() {
+        Car postCarTest = new Car("BMW", "e30", 200);
+        given()
+                .contentType("application/json")
+                .body(postCarTest)
+                .when().post("/hello/car")
+                .then()
+                .statusCode(200)
+                .assertThat()
+                .body("brand", equalTo(postCarTest.getBrand()))
+                .body("model", equalTo(postCarTest.getModel()))
+                .body("power", equalTo(postCarTest.getPower()));
+    }
+
 }
